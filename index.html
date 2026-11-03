@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>All Housekeeping Needs</title>
+<style>
+body{font-family:Arial,sans-serif;margin:0;background:#f4f6f8}
+header{background:#0a7d3b;color:#fff;padding:14px;text-align:center;font-size:20px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:10px}
+.card{background:#fff;border-radius:10px;padding:12px;text-align:center;box-shadow:0 1px 4px #0002}
+.card h3{margin:6px 0;font-size:15px}
+button{background:#0a7d3b;color:#fff;border:0;border-radius:8px;padding:10px;font-size:15px}
+#cart{background:#fff;margin:10px;padding:12px;border-radius:10px}
+.row{display:flex;justify-content:space-between;align-items:center;margin:6px 0}
+#order{width:100%;background:#25d366;margin-top:10px}
+</style>
+</head>
+<body>
+<header>🧹 All Housekeeping Needs</header>
+<div class="grid" id="grid"></div>
+<div id="cart">
+<b>Cart</b>
+<div id="items">Cart khali hai</div>
+<div class="row"><b>Total</b><b id="total">₹0</b></div>
+<button id="order" onclick="order()">WhatsApp par order karein</button>
+</div>
+<script>
+const WHATSAPP="91XXXXXXXXXX";
+const products=[
+{name:"Phenyl 1L",price:120},
+{name:"Jhadu",price:80},
+{name:"Pocha Set",price:250},
+{name:"Toilet Cleaner",price:99}
+];
+let cart={};
+const grid=document.getElementById("grid");
+products.forEach((p,i)=>{
+grid.innerHTML+=`<div class="card"><h3>${p.name}</h3><p>₹${p.price}</p><button onclick="add(${i})">Add</button></div>`;
+});
+function add(i){cart[i]=(cart[i]||0)+1;show()}
+function remove(i){cart[i]--;if(!cart[i])delete cart[i];show()}
+function show(){
+let h="",t=0;
+for(const i in cart){
+const p=products[i],q=cart[i];
+t+=p.price*q;
+h+=`<div class="row"><span>${p.name} x${q}</span><span>₹${p.price*q} <button onclick="remove(${i})">−</button></span></div>`;
+}
+document.getElementById("items").innerHTML=h||"Cart khali hai";
+document.getElementById("total").textContent="₹"+t;
+}
+function order(){
+let m="Namaste, mujhe order dena hai:\n",t=0;
+for(const i in cart){
+const p=products[i],q=cart[i];
+t+=p.price*q;
+m+=`${p.name} x${q} = ₹${p.price*q}\n`;
+}
+if(!t){alert("Pehle product add karein");return}
+m+=`Total: ₹${t}`;
+window.open("https://wa.me/"+WHATSAPP+"?text="+encodeURIComponent(m));
+}
+</script>
+</body>
+</html>
