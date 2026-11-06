@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -58,63 +58,63 @@ footer{text-align:center;padding:10px 18px 30px;color:#4b6b73;font-size:.95rem}
 
 <header><div class="wrap">
   <h1 id="shopName">All Housekeeping Needs</h1>
-  <p>घर और दुकान की सफ़ाई का सामान। WhatsApp पर ऑर्डर करें, हम घर तक पहुँचाएँगे।</p>
+  <p>Cleaning supplies for home and shop. Order on WhatsApp and we will deliver to your door.</p>
 </div></header>
 
 <div class="bar"><div class="wrap">
-  <input id="q" type="search" placeholder="सामान खोजें, जैसे फिनाइल, झाड़ू" aria-label="सामान खोजें">
+  <input id="q" type="search" placeholder="Search items, e.g. Phenyl, Broom" aria-label="Search items">
   <div class="cats" id="cats"></div>
 </div></div>
 
 <main><div class="wrap">
   <div class="grid" id="grid"></div>
-  <div class="empty" id="empty" hidden>कोई सामान नहीं मिला। दूसरा नाम खोजें।</div>
+  <div class="empty" id="empty" hidden>No items found. Try another name.</div>
 </div></main>
 
 <footer id="foot"></footer>
 
-<button class="cartbtn" id="cartbtn"><span id="cnt"></span><span>ऑर्डर देखें</span><span id="tot"></span></button>
+<button class="cartbtn" id="cartbtn"><span id="cnt"></span><span>View Order</span><span id="tot"></span></button>
 
-<div class="sheet" id="sheet"><div class="panel" role="dialog" aria-label="आपका ऑर्डर">
-  <button class="close" id="close">बंद करें</button>
-  <h2>आपका ऑर्डर</h2>
+<div class="sheet" id="sheet"><div class="panel" role="dialog" aria-label="Your order">
+  <button class="close" id="close">Close</button>
+  <h2>Your Order</h2>
   <div id="lines"></div>
-  <div class="total"><span>कुल</span><span id="sum"></span></div>
-  <label for="name">आपका नाम</label>
+  <div class="total"><span>Total</span><span id="sum"></span></div>
+  <label for="name">Your name</label>
   <input id="name" autocomplete="name">
-  <label for="addr">पूरा पता</label>
+  <label for="addr">Full address</label>
   <textarea id="addr" rows="3" autocomplete="street-address"></textarea>
-  <button class="send" id="send">WhatsApp पर ऑर्डर भेजें</button>
-  <p class="note">बटन दबाने पर WhatsApp खुलेगा और आपका ऑर्डर लिखा हुआ मिलेगा। बस भेज दें।</p>
+  <button class="send" id="send">Send Order on WhatsApp</button>
+  <p class="note">When you tap the button, WhatsApp will open with your order already written. Just press send.</p>
 </div></div>
 
 <script>
 /* ====== यहाँ अपनी जानकारी बदलें ====== */
 const SHOP_NAME = "All Housekeeping Needs";      // अपनी दुकान का नाम
 const WHATSAPP  = "918910887584";            // अपना नंबर: 91 के साथ, बिना + या खाली जगह के
-const DELIVERY_NOTE = "₹500 से ऊपर के ऑर्डर पर डिलीवरी फ़्री";   // खाली छोड़ सकते हैं: ""
+const DELIVERY_NOTE = "Free delivery on orders above ₹500";   // खाली छोड़ सकते हैं: ""
 
 // हर सामान: id, नाम, साइज़/मात्रा, दाम (₹), कैटेगरी, इमोजी
 // पहले 4 सामान आपकी पुरानी साइट से हैं। बाकी उदाहरण हैं, अपने असली सामान और दाम लिखें।
 const PRODUCTS = [
-  {id:1, n:"फर्श क्लीनर",    s:"1 लीटर",  p:120, c:"फर्श", e:"🧴"},
-  {id:2, n:"फिनाइल",         s:"1 लीटर",  p:120, c:"फर्श", e:"🧴"},
-  {id:3, n:"पोछा (मॉप)",     s:"1 पीस",   p:250, c:"फर्श", e:"🧹"},
-  {id:4, n:"झाड़ू",           s:"1 पीस",   p:80,  c:"फर्श", e:"🧹"},
-  {id:5, n:"टॉयलेट क्लीनर",  s:"500 मि.ली.", p:99, c:"बाथरूम", e:"🚽"},
-  {id:6, n:"हैंड वॉश",        s:"250 मि.ली.", p:75, c:"बाथरूम", e:"🧼"},
-  {id:7, n:"बाथरूम ब्रश",    s:"1 पीस",   p:60,  c:"बाथरूम", e:"🪥"},
-  {id:8, n:"डिशवॉश लिक्विड", s:"500 मि.ली.", p:110, c:"किचन", e:"🍽️"},
-  {id:9, n:"स्क्रब पैड",      s:"3 का पैक", p:45, c:"किचन", e:"🧽"},
-  {id:10,n:"डिटर्जेंट पाउडर", s:"1 किलो",  p:130, c:"कपड़े", e:"👕"},
-  {id:11,n:"माइक्रोफाइबर कपड़ा", s:"2 का पैक", p:99, c:"सफ़ाई", e:"🧻"},
-  {id:12,n:"कचरे की थैली",    s:"30 पीस",  p:85,  c:"सफ़ाई", e:"🗑️"}
+  {id:1, n:"Floor Cleaner",     s:"1 Litre",  p:120, c:"Floor", e:"🧴"},
+  {id:2, n:"Phenyl",            s:"1 Litre",  p:120, c:"Floor", e:"🧴"},
+  {id:3, n:"Floor Mop",         s:"1 pc",     p:250, c:"Floor", e:"🧹"},
+  {id:4, n:"Broom",             s:"1 pc",     p:80,  c:"Floor", e:"🧹"},
+  {id:5, n:"Toilet Cleaner",    s:"500 ml",   p:99,  c:"Bathroom", e:"🚽"},
+  {id:6, n:"Hand Wash",         s:"250 ml",   p:75,  c:"Bathroom", e:"🧼"},
+  {id:7, n:"Bathroom Brush",    s:"1 pc",     p:60,  c:"Bathroom", e:"🪥"},
+  {id:8, n:"Dishwash Liquid",   s:"500 ml",   p:110, c:"Kitchen", e:"🍽️"},
+  {id:9, n:"Scrub Pad",         s:"Pack of 3", p:45, c:"Kitchen", e:"🧽"},
+  {id:10,n:"Detergent Powder",  s:"1 kg",     p:130, c:"Clothes", e:"👕"},
+  {id:11,n:"Microfibre Cloth",  s:"Pack of 2", p:99, c:"Cleaning", e:"🧻"},
+  {id:12,n:"Garbage Bags",      s:"30 pcs",   p:85,  c:"Cleaning", e:"🗑️"}
 ];
 /* ====== बस इतना ही। इसके नीचे कुछ न बदलें ====== */
 
 const $ = id => document.getElementById(id);
 const rs = n => "₹" + n.toLocaleString("en-IN");
-let cart = {}, cat = "सभी", term = "";
+let cart = {}, cat = "All", term = "";
 
 try { cart = JSON.parse(localStorage.getItem("cart") || "{}"); } catch(e) { cart = {}; }
 const save = () => { try { localStorage.setItem("cart", JSON.stringify(cart)); } catch(e) {} };
@@ -123,20 +123,20 @@ document.title = SHOP_NAME;
 $("shopName").textContent = SHOP_NAME;
 $("foot").textContent = DELIVERY_NOTE;
 
-const CATS = ["सभी", ...new Set(PRODUCTS.map(p => p.c))];
+const CATS = ["All", ...new Set(PRODUCTS.map(p => p.c))];
 $("cats").innerHTML = CATS.map(c => `<button data-c="${c}" class="${c===cat?"on":""}">${c}</button>`).join("");
 $("cats").onclick = e => { const c = e.target.dataset.c; if(!c) return; cat = c;
   [...$("cats").children].forEach(b => b.classList.toggle("on", b.dataset.c===cat)); draw(); };
-$("q").oninput = e => { term = e.target.value.trim(); draw(); };
+$("q").oninput = e => { term = e.target.value.trim().toLowerCase(); draw(); };
 
 function draw(){
-  const list = PRODUCTS.filter(p => (cat==="सभी"||p.c===cat) && (p.n+p.s).includes(term));
+  const list = PRODUCTS.filter(p => (cat==="All"||p.c===cat) && (p.n+p.s).toLowerCase().includes(term));
   $("empty").hidden = list.length > 0;
   $("grid").innerHTML = list.map(p => {
     const q = cart[p.id] || 0;
     const ctl = q
-      ? `<div class="qty"><button data-m="${p.id}" aria-label="कम करें">−</button><span>${q}</span><button data-a="${p.id}" aria-label="बढ़ाएँ">+</button></div>`
-      : `<button class="add" data-a="${p.id}">जोड़ें</button>`;
+      ? `<div class="qty"><button data-m="${p.id}" aria-label="Decrease">−</button><span>${q}</span><button data-a="${p.id}" aria-label="Increase">+</button></div>`
+      : `<button class="add" data-a="${p.id}">Add</button>`;
     return `<div class="card"><div class="pic">${p.e}</div><h3>${p.n}</h3><div class="size">${p.s}</div><div class="price">${rs(p.p)}</div>${ctl}</div>`;
   }).join("");
   bar();
@@ -157,7 +157,7 @@ function totals(){
 function bar(){
   const {n, t} = totals();
   $("cartbtn").classList.toggle("show", n > 0);
-  $("cnt").textContent = n + " सामान"; $("tot").textContent = rs(t);
+  $("cnt").textContent = n + (n === 1 ? " item" : " items"); $("tot").textContent = rs(t);
 }
 function lines(){
   $("lines").innerHTML = Object.keys(cart).map(id => {
@@ -173,13 +173,13 @@ $("sheet").onclick = e => { if(e.target.id==="sheet") $("sheet").classList.remov
 
 $("send").onclick = () => {
   const name = $("name").value.trim(), addr = $("addr").value.trim();
-  if(!name){ $("name").focus(); return alert("कृपया अपना नाम लिखें"); }
-  if(!addr){ $("addr").focus(); return alert("कृपया अपना पता लिखें"); }
-  let m = `नमस्ते, मुझे ये सामान चाहिए:\n\n`;
+  if(!name){ $("name").focus(); return alert("Please enter your name"); }
+  if(!addr){ $("addr").focus(); return alert("Please enter your address"); }
+  let m = `Hello, I would like to order these items:\n\n`;
   let i = 1;
   for(const id in cart){ const p = PRODUCTS.find(x => x.id==id);
     m += `${i++}. ${p.n} (${p.s}) × ${cart[id]} = ${rs(p.p*cart[id])}\n`; }
-  m += `\nकुल: ${rs(totals().t)}\n\nनाम: ${name}\nपता: ${addr}`;
+  m += `\nTotal: ${rs(totals().t)}\n\nName: ${name}\nAddress: ${addr}`;
   window.open("https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(m), "_blank");
 };
 draw();
